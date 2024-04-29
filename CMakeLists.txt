@@ -17,7 +17,11 @@ set(CMAKE_MACOSX_RPATH 1)
 set(CMAKE_CXX_STANDARD 11)
 
 if (WIN32)
-  add_definitions(/bigobj)
+  if(MSVC)
+    add_definitions(/bigobj)
+  else()
+    add_definitions(-Wa,-mbig-obj)
+  endif()
   #set(CMAKE_WINDOWS_EXPORT_ALL_SYMBOLS 1)
   #this must be disabled unless the previous option (CMAKE_WINDOWS_EXPORT_ALL_SYMBOLS) is enabled
   option(BUILD_SHARED_LIBS "Build shared libraries" OFF)

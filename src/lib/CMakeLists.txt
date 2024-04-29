@@ -19,7 +19,9 @@ set_target_properties(fst PROPERTIES
 )
 
 if(WIN32)
-  target_link_options(fst INTERFACE /WHOLEARCHIVE:$<TARGET_LINKER_FILE:fst>)
+  if(MSVC)
+    target_link_options(fst INTERFACE /WHOLEARCHIVE:$<TARGET_LINKER_FILE:fst>)
+  endif()
 endif()
 
 install(TARGETS fst
